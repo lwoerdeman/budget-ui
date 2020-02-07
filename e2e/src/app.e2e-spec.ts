@@ -8,9 +8,9 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display app title', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('budget-ui app is running!');
+    expect(page.getTitleText()).toEqual('Budget');
   });
 
   afterEach(async () => {
