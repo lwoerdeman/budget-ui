@@ -13,10 +13,24 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { environment } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {
+  AngularFireAuthGuard,
+  canActivate,
+  redirectLoggedInTo,
+  redirectUnauthorizedTo
+} from "@angular/fire/auth-guard";
+
+const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
+const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['/']);
+
+
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'sign-up', component: SignUpComponent}
+  {path: '', component: HomeComponent, ...canActivate(redirectLoggedInToDashboard)},
+  {path: 'sign-up', component: SignUpComponent},
+  {path: 'dashboard', component: DashboardComponent, ...canActivate(redirectUnauthorizedToHome)},
+
 ];
 
 @NgModule({
@@ -24,7 +38,8 @@ const appRoutes: Routes = [
     AppComponent,
     ToolbarComponent,
     HomeComponent,
-    SignUpComponent
+    SignUpComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -42,4 +57,5 @@ const appRoutes: Routes = [
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
