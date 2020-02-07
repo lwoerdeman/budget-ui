@@ -18,7 +18,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   public signIn() {
-    this.authService.user = new User("Landon Woerdeman", "fake.email@gmail.com");
+    this.authService.user = new User("Landon", "Woerdeman", "fake.email@gmail.com");
   }
 
   public signUp() {
