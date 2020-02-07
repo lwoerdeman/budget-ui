@@ -8,16 +8,20 @@ import { HomeComponent } from './home/home.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertModule } from "./alert/alert.module";
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { ReactiveFormsModule } from "@angular/forms";
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent}
+  {path: '', component: HomeComponent},
+  {path: 'sign-up', component: SignUpComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
-    HomeComponent
+    HomeComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,8 @@ const appRoutes: Routes = [
     ),
     ClarityModule,
     BrowserAnimationsModule,
-    AlertModule
+    AlertModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

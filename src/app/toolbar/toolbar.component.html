@@ -20,7 +20,7 @@
     </ng-container>
     <ng-template #login>
       <div class="signup-buttons">
-        <button class="nav-btn btn" (click)="signUp()">Sign Up</button>
+        <button class="nav-btn btn" [routerLink]="'sign-up'">Sign Up</button>
         <button class="nav-btn btn btn-primary" (click)="signIn()">Sign In</button>
       </div>
     </ng-template>

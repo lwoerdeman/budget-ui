@@ -1,0 +1,24 @@
+<h1>Ready to Get Started?</h1>
+<h2>A new budgeting experience awaits!</h2>
+<form clrForm [formGroup]="signupForm" (ngSubmit)="submit()">
+  <clr-input-container>
+    <label for="firstName">First Name</label>
+    <input clrInput type="text" formControlName="firstName" id="firstName"/>
+  </clr-input-container>
+  <clr-input-container>
+    <label for="lastName">Last Name</label>
+    <input clrInput type="text" formControlName="lastName" id="lastName"/>
+  </clr-input-container>
+  <clr-input-container>
+    <label for="email">Email</label>
+    <input clrInput type="text" formControlName="email" id="email"/>
+    <clr-control-error>The email entered isn't valid</clr-control-error>
+  </clr-input-container>
+  <clr-input-container>
+    <label for="password">Password</label>
+    <input clrInput type="text" formControlName="password" id="password"/>
+    <clr-control-helper>Password must be at least 8 characters, with at least one uppercase letter, lowercase letter, and number</clr-control-helper>
+    <clr-control-error>Password must be at least 8 characters, with at least one uppercase letter, lowercase letter, and number</clr-control-error>
+  </clr-input-container>
+  <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">Submit</button>
+</form>
