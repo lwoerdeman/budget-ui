@@ -9,27 +9,28 @@ import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertModule } from "./alert/alert.module";
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { environment } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {
-  AngularFireAuthGuard,
   canActivate,
   redirectLoggedInTo,
   redirectUnauthorizedTo
 } from "@angular/fire/auth-guard";
+import { LoginComponent } from './login/login.component';
 
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
-const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['/']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['sign-in']);
 
 
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, ...canActivate(redirectLoggedInToDashboard)},
   {path: 'sign-up', component: SignUpComponent},
-  {path: 'dashboard', component: DashboardComponent, ...canActivate(redirectUnauthorizedToHome)},
+  {path: 'sign-in', component: LoginComponent},
+  {path: 'dashboard', component: DashboardComponent, ...canActivate(redirectUnauthorizedToLogin)},
 
 ];
 
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     ToolbarComponent,
     HomeComponent,
     SignUpComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ const appRoutes: Routes = [
     ClarityModule,
     BrowserAnimationsModule,
     AlertModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

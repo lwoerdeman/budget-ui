@@ -1,0 +1,29 @@
+<div class="login-wrapper">
+  <form class="login" clrForm [formGroup]="loginForm" (ngSubmit)="submit()">
+    <section class="title">
+      <h3 class="welcome">Welcome to</h3>
+      Budget
+      <h5 class="hint">Use your email and password to sign in or sign in with Google</h5>
+    </section>
+    <div class="login-group">
+      <clr-input-container>
+        <label for="email" class="clr-sr-only">Email</label>
+        <input type="text" id="email" name="email" clrInput placeholder="Email" formControlName="email"/>
+        <clr-control-error>The email entered isn't valid</clr-control-error>
+      </clr-input-container>
+      <clr-password-container>
+        <label for="password" class="clr-sr-only">Password</label>
+        <input type="password" id="password" name="password" clrPassword placeholder="Password" formControlName="password"/>
+      </clr-password-container>
+      <clr-checkbox-wrapper>
+        <label for="rememberMe">Remember me</label>
+        <input type="checkbox" id="rememberMe" name="rememberMe" clrCheckbox formControlName="rememberMe"/>
+      </clr-checkbox-wrapper>
+      <div *ngIf="errMessage" class="error active">
+        {{errMessage}}
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
+      <button class="btn btn-secondary" (click)="signInWithGoogle()">Login with Google</button>
+    </div>
+  </form>
+</div>
