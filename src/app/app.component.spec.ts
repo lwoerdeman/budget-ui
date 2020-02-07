@@ -1,11 +1,22 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { Component } from "@angular/core";
+
+@Component({selector: 'app-alert', template: ''})
+class AlertStubComponent {}
+@Component({selector: 'app-toolbar', template: ''})
+class ToolbarStubComponent {}
+@Component({selector: 'router-outlet', template: ''})
+class RouterOutletStubComponent { }
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        AlertStubComponent,
+        ToolbarStubComponent,
+        RouterOutletStubComponent
       ],
     }).compileComponents();
   }));
@@ -20,12 +31,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('budget-ui');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('budget-ui app is running!');
   });
 });

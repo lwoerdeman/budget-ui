@@ -7,8 +7,22 @@
     <a href="#" class="nav-link nav-text">Interactive Analytics</a>
   </div>
   <div class="header-actions">
-    <a href="#" class="nav-link nav-icon" aria-label="settings">
-      <clr-icon shape="cog"></clr-icon>
-    </a>
+    <ng-container *ngIf="authService.user$ | async as user; else login">
+      <clr-dropdown>
+        <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
+          {{user.email}}
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <a clrDropdownItem (click)="signOut()">Sign Out</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </ng-container>
+    <ng-template #login>
+      <div class="signup-buttons">
+        <button class="nav-btn btn" (click)="signUp()">Sign Up</button>
+        <button class="nav-btn btn btn-primary" (click)="signIn()">Sign In</button>
+      </div>
+    </ng-template>
   </div>
 </header>
