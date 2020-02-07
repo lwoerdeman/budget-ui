@@ -10,6 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertModule } from "./alert/alert.module";
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { environment } from "../environments/environment";
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -29,6 +32,8 @@ const appRoutes: Routes = [
       appRoutes,
       {enableTracing: true} // <-- debugging purposes only
     ),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     ClarityModule,
     BrowserAnimationsModule,
     AlertModule,

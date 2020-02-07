@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserSignup } from "../models/user-signup";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AlertService } from "../alert/alert.service";
+import UserCredential = firebase.auth.UserCredential;
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 export class SignUpComponent implements OnInit {
   signupForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private auth: AngularFireAuth, private alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -24,8 +26,31 @@ export class SignUpComponent implements OnInit {
 
   submit() {
     const val = this.signupForm.value;
-    const user = new UserSignup(val.firstName, val.lastName, val.email, val.password);
-    console.log(user);
+    this.auth.createUserWithEmailAndPassword(val.email, val.password).then(
+      (cred: UserCredential) => {
+        cred.user.updateProfile({displayName: `${val.firstName} ${val.lastName}`});
+      },
+      err => {
+        switch (err.code) {
+          case 'auth/email-already-in-use':
+            this.alertService.error(err.message);
+            this.signupForm.controls['email'].setErrors({incorrect: true});
+            break;
+          case 'auth/invalid-email':
+            this.alertService.error(err.message);
+            this.signupForm.controls['email'].setErrors({incorrect: true});
+            break;
+          case 'auth/operation-not-allowed':
+            this.alertService.error('Unable to sign you up - please contact us');
+            this.signupForm.reset();
+            break;
+          case 'auth/weak-password':
+            this.alertService.error(err.message);
+            this.signupForm.controls['password'].setErrors({incorrect: true});
+            break;
+        }
+      }
+    );
   }
 
 }

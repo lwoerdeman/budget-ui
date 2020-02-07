@@ -7,7 +7,7 @@
     <a href="#" class="nav-link nav-text">Interactive Analytics</a>
   </div>
   <div class="header-actions">
-    <ng-container *ngIf="authService.user$ | async as user; else login">
+    <ng-container *ngIf="auth.user | async as user; else login">
       <clr-dropdown>
         <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
           {{user.email}}

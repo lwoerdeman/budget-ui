@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from "rxjs";
-import { AlertMessage } from "./alert-message";
+import { AlertMessage, AlertType } from "./alert-message";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,15 @@ export class AlertService {
 
   constructor() { }
 
-  sendAlert(alert: AlertMessage) {
-    this.alertSubject.next(alert);
+  info(message: string) {
+    this.alertSubject.next(new AlertMessage(message, AlertType.INFO));
+  }
+
+  warn(message: string) {
+    this.alertSubject.next(new AlertMessage(message, AlertType.WARNING));
+  }
+
+  error(message: string) {
+    this.alertSubject.next(new AlertMessage(message, AlertType.ERROR));
   }
 }
